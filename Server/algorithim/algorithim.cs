@@ -34,35 +34,35 @@ namespace Server.algorithim
             int randomMenues = random.Next(3, 8);
             int randomItemsToSwap = random.Next(2, 4);
 
-            for(int i = 0; i < randomMenues; i++)
+            for (int i = 0; i < randomMenues; i++)
             {
                 int randomMenu1 = random.Next(1, 5);
                 int randomMenu2 = random.Next(1, 5);
 
-                while(randomMenu2 == randomMenu1)
+                while (randomMenu2 == randomMenu1)
                     randomMenu2 = random.Next(1, 5);
 
                 Menu newMenu1 = menuPopulation[randomMenu1].Clone();
                 Menu newMenu2 = menuPopulation[randomMenu2].Clone();
 
-                for(int j = 0; j < randomItemsToSwap; j ++)
+                for (int j = 0; j < randomItemsToSwap; j++)
                 {
                     // 1 - breakfast, 2 - Lunch, 3 - dinner
                     int randomMeal = random.Next(1, 3);
-                    
-                    switch(randomMeal)
+
+                    switch ((MealType)randomMeal)
                     {
-                        case 1:
+                        case MealType.Breakfast:
                             {
                                 mergeMeals(newMenu1.Breakfast.ToList(), newMenu2.Breakfast.ToList());
                                 break;
                             }
-                        case 2:
+                        case MealType.Lunch:
                             {
                                 mergeMeals(newMenu1.Lunch.ToList(), newMenu2.Lunch.ToList());
                                 break;
                             }
-                        case 3:
+                        case MealType.Dinner:
                             {
                                 mergeMeals(newMenu1.Dinner.ToList(), newMenu2.Dinner.ToList());
                                 break;
@@ -73,8 +73,48 @@ namespace Server.algorithim
                 res.Add(newMenu1);
                 res.Add(newMenu2);
             }
+            
+            int randomMutation = random.Next(2, 4);
+            menuPopulation = menuPopulation.Concat(res).ToList();
 
-            return menuPopulation.Concat(res).ToList();
+            for (int i = 0; i < randomMutation; i++)
+            {
+                int randomMutationIndex = random.Next(0, menuPopulation.Count() - 1);
+                // 1 - breakfast, 2 - Lunch, 3 - dinner
+                int randomMeal = random.Next(1, 3);
+
+                switch ((MealType)randomMeal)
+                {
+                    case MealType.Breakfast:
+                        {
+                            int randomFood1 = random.Next(0, menuPopulation[randomMutationIndex].Breakfast.Count - 1);
+                            menuPopulation[randomMutationIndex].Breakfast.RemoveAt(randomFood1);
+                            menuPopulation[randomMutationIndex].Breakfast.Add(getFoodRand(MealType.Breakfast));
+                            break;
+                        }
+                    case MealType.Lunch:
+                        {
+                            int randomFood1 = random.Next(0, menuPopulation[randomMutationIndex].Lunch.Count - 1);
+                            menuPopulation[randomMutationIndex].Lunch.RemoveAt(randomFood1);
+                            menuPopulation[randomMutationIndex].Lunch.Add(getFoodRand(MealType.Lunch));
+                            break;
+                        }
+                    case MealType.Dinner:
+                        {
+                            int randomFood1 = random.Next(0, menuPopulation[randomMutationIndex].Dinner.Count - 1);
+                            menuPopulation[randomMutationIndex].Dinner.RemoveAt(randomFood1);
+                            menuPopulation[randomMutationIndex].Dinner.Add(getFoodRand(MealType.Dinner));
+                            break;
+                        }
+                }
+            }
+
+            return menuPopulation;
+        }
+
+        private FoodItem getFoodRand(MealType mealType)
+        {
+            return new FoodItem();
         }
 
         private void mergeMeals(List<FoodItem> meal1, List<FoodItem> meal2)
@@ -95,6 +135,7 @@ namespace Server.algorithim
         {
             foreach (var menuIndividual in menuPopulation)
             {
+                menuIndividual.MenuFitness = 0;
                 menuIndividual.MenuFitness += calculateRate(user.Goals.NeededCalories(user), menuIndividual.TotalCalories);
                 menuIndividual.MenuFitness += calculateRate(user.Goals.NeededCarbohydrates(user), menuIndividual.TotalCarbohydrates);
                 menuIndividual.MenuFitness += calculateRate(user.Goals.NeededFat, menuIndividual.TotalFat);
@@ -108,6 +149,13 @@ namespace Server.algorithim
                 return 0;
 
             return (float)((y > x) ? x / y : y / x);
+        }
+
+        private enum MealType
+        {
+            Breakfast =1,
+            Lunch,
+            Dinner 
         }
     }
 }
