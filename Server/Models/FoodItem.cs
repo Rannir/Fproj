@@ -8,5 +8,9 @@ namespace Server.Models
 {
     public class FoodItem : BasicNutrients
     {
+        public FoodItem Clone()
+        {
+            return this;
+        }
     }
 }

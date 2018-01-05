@@ -1,2 +1,17 @@
 C:\Users\Ran\Desktop\finalproject\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
 C:\Users\Ran\Desktop\finalproject\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\Ran\Desktop\finalproject\Server\bin\Server.dll.config
+C:\Users\Ran\Desktop\finalproject\Server\bin\Server.dll
+C:\Users\Ran\Desktop\finalproject\Server\bin\Server.pdb
+C:\Users\Ran\Desktop\finalproject\Server\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Ran\Desktop\finalproject\Server\bin\Newtonsoft.Json.dll
+C:\Users\Ran\Desktop\finalproject\Server\bin\System.Net.Http.Formatting.dll
+C:\Users\Ran\Desktop\finalproject\Server\bin\System.Web.Http.dll
+C:\Users\Ran\Desktop\finalproject\Server\bin\System.Web.Http.WebHost.dll
+C:\Users\Ran\Desktop\finalproject\Server\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Ran\Desktop\finalproject\Server\bin\Newtonsoft.Json.xml
+C:\Users\Ran\Desktop\finalproject\Server\bin\System.Net.Http.Formatting.xml
+C:\Users\Ran\Desktop\finalproject\Server\bin\System.Web.Http.xml
+C:\Users\Ran\Desktop\finalproject\Server\bin\System.Web.Http.WebHost.xml
+C:\Users\Ran\Desktop\finalproject\Server\obj\Debug\Server.dll
+C:\Users\Ran\Desktop\finalproject\Server\obj\Debug\Server.pdb
